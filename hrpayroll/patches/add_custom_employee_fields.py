@@ -6,25 +6,25 @@ def execute():
 		"Employee": [
 			{
 				"fieldname": "custom_basic",
-				"label": "Custom Basic",
+				"label": "Basic",
 				"fieldtype": "Float",
 				"insert_after": "salary_mode"
 			},
 			{
 				"fieldname": "custom_special_allowance",
-				"label": "Custom Special Allowance",
+				"label": "Special Allowance",
 				"fieldtype": "Float",
 				"insert_after": "custom_basic"
 			},
 			{
 				"fieldname": "custom_hra",
-				"label": "Custom HRA",
+				"label": "HRA",
 				"fieldtype": "Float",
 				"insert_after": "custom_special_allowance"
 			},
 			{
 				"fieldname": "custom_conveyance_allowance",
-				"label": "Custom Conveyance Allowance",
+				"label": "Conveyance Allowance",
 				"fieldtype": "Float",
 				"insert_after": "custom_hra"
 			},

@@ -1,5 +1,3 @@
-Salary Slip.py
- 
 import frappe
 from frappe.utils import flt
  
