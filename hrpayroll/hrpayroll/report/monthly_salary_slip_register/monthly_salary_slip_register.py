@@ -1,5 +1,6 @@
 # Copyright (c) 2026, Antigravity and contributors
 # For license information, please see license.txt
+# Trigger reload
 
 import frappe
 from frappe import _
@@ -79,14 +80,14 @@ def download_excel(filters):
 	total_row = ["Total"] + [""] * (len(column_labels) - 1)
 	totals = {}
 	for f in fieldnames:
-		if f in ["employee_name", "unit_name", "remarks", "idx"]:
+		if f in ["employee", "employee_name", "designation", "department", "unit_name", "remarks", "idx"]:
 			continue
 		totals[f] = sum(flt(row.get(f)) for row in data)
 		
 	# Build the total row list
 	total_row = []
 	for f in fieldnames:
-		if f == "employee_name":
+		if f == "employee":
 			total_row.append("Total")
 		elif f in totals:
 			total_row.append(totals[f])
@@ -129,6 +130,7 @@ def download_excel(filters):
 def get_columns():
 	return [
 		# {"label": _("S.NO."), "fieldname": "idx", "fieldtype": "Int", "width": 50},
+		{"label": _("EMPLOYEE CODE"), "fieldname": "employee", "fieldtype": "Data", "width": 120},
 		{"label": _("EMPLOYEE NAME"), "fieldname": "employee_name", "fieldtype": "Data", "width": 150},
 		{"label": _("DESIGNATION"), "fieldname": "designation", "fieldtype": "Data", "width": 120},
 		{"label": _("DEPARTMENT"), "fieldname": "department", "fieldtype": "Data", "width": 120},
@@ -177,6 +179,7 @@ def get_data(filters):
 		emp_info = employee_map.get(ss.employee, {})
 		row = {
 			"idx": i + 1,
+			"employee": ss.employee,
 			"employee_name": ss.employee_name,
 			"designation": emp_info.get("designation"),
 			"department": emp_info.get("department"),
