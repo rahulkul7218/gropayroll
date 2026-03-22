@@ -69,6 +69,12 @@ def execute():
 				"label": "MISC",
 				"fieldtype": "Float",
 				"insert_after": "other_deduction"
+			},
+			{
+				"fieldname": "all_1",
+				"label": "ALL.1",
+				"fieldtype": "Float",
+				"insert_after": "other_deduction"
 			}
 		]
 	}

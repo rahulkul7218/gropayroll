@@ -24,7 +24,8 @@ def fetch_employee_salary_details(doc, method=None):
             "tds",
             "professional_tax",
             "other_deduction",
-            "misc"
+            "misc",
+            "all_1"
         ]
        
         employee_data = frappe.db.get_value("Employee", doc.employee, fields, as_dict=True)
@@ -37,7 +38,8 @@ def fetch_employee_salary_details(doc, method=None):
             "Basic": "custom_basic",
             "HRA": "custom_hra",
             "Special Allowance": "custom_special_allowance",
-            "Conveyance Allowance": "custom_conveyance_allowance"
+            "Conveyance Allowance": "custom_conveyance_allowance",
+            "ALL.1": "all_1"
         }
 
         deductions_mapping = {
