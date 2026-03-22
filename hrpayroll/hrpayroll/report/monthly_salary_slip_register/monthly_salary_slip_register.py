@@ -146,6 +146,7 @@ def get_columns():
 		{"label": _("HRA"), "fieldname": "hra", "fieldtype": "Currency", "width": 120},
 		{"label": _("CONV. ALL."), "fieldname": "conv_all", "fieldtype": "Currency", "width": 120},
 		{"label": _("SPL. ALL."), "fieldname": "spl_all", "fieldtype": "Currency", "width": 120},
+		{"label": _("ALL.1"), "fieldname": "all_1", "fieldtype": "Currency", "width": 120},
 		{"label": _("TOTAL RATE"), "fieldname": "total_rate", "fieldtype": "Currency", "width": 120},
 		{"label": _("EPF"), "fieldname": "epf", "fieldtype": "Currency", "width": 120},
 		{"label": _("ESI"), "fieldname": "esi", "fieldtype": "Currency", "width": 120},
@@ -171,7 +172,7 @@ def get_data(filters):
 	)
 	
 	# Pre-fetch Employee Details
-	employee_map = {e.name: e for e in frappe.db.get_all("Employee", fields=["name", "holiday_list", "designation", "department"])}
+	employee_map = {e.name: e for e in frappe.db.get_all("Employee", fields=["name", "holiday_list", "designation", "department", "all_1"])}
 	
 	# Fetch child table data
 	for i, ss in enumerate(ss_list):
@@ -197,6 +198,7 @@ def get_data(filters):
 			"hra": 0.0,
 			"conv_all": 0.0,
 			"spl_all": 0.0,
+			"all_1": flt(emp_info.get("all_1")),
 			"total_rate": flt(ss.gross_pay),
 			"epf": 0.0,
 			"esi": 0.0,

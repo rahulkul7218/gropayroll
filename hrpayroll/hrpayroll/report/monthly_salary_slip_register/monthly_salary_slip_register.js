@@ -45,7 +45,7 @@ frappe.query_reports["Monthly Salary Slip Register"] = {
 	"formatter": function (value, row, column, data, default_formatter) {
 		value = default_formatter(value, row, column, data);
 
-		const earnings = ["basic", "hra", "conv_all", "spl_all", "total_rate", "gross_salary"];
+		const earnings = ["basic", "hra", "conv_all", "spl_all", "all_1", "total_rate", "gross_salary"];
 		const deductions = ["epf", "esi", "loan", "tds", "professional_tax", "other_deduction", "misc", "total_deduction"];
 
 		if (earnings.includes(column.fieldname)) {
