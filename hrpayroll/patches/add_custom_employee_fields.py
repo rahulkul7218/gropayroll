@@ -75,6 +75,12 @@ def execute():
 				"label": "ALL.1",
 				"fieldtype": "Float",
 				"insert_after": "other_deduction"
+			},
+			{
+				"fieldname": "cat_no",
+				"label": "Cat Name",
+				"fieldtype": "Data",
+				"insert_after": "all_1"
 			}
 		]
 	}

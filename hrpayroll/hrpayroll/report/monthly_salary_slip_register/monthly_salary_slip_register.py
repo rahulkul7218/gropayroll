@@ -80,7 +80,7 @@ def download_excel(filters):
 	total_row = ["Total"] + [""] * (len(column_labels) - 1)
 	totals = {}
 	for f in fieldnames:
-		if f in ["employee", "employee_name", "designation", "department", "unit_name", "remarks", "idx"]:
+		if f in ["employee", "employee_name", "gender", "designation", "department", "cat_name", "unit_name", "unit_nam", "aadhaar_number", "esic_no", "uan", "remarks", "idx"]:
 			continue
 		totals[f] = sum(flt(row.get(f)) for row in data)
 		
@@ -132,9 +132,15 @@ def get_columns():
 		# {"label": _("S.NO."), "fieldname": "idx", "fieldtype": "Int", "width": 50},
 		{"label": _("EMPLOYEE CODE"), "fieldname": "employee", "fieldtype": "Data", "width": 120},
 		{"label": _("EMPLOYEE NAME"), "fieldname": "employee_name", "fieldtype": "Data", "width": 150},
+		{"label": _("GENDER"), "fieldname": "gender", "fieldtype": "Data", "width": 150},
 		{"label": _("DESIGNATION"), "fieldname": "designation", "fieldtype": "Data", "width": 120},
 		{"label": _("DEPARTMENT"), "fieldname": "department", "fieldtype": "Data", "width": 120},
-		{"label": _("UNIT NAME"), "fieldname": "unit_name", "fieldtype": "Data", "width": 120},
+		{"label": _("CAT NAME"), "fieldname": "cat_name", "fieldtype": "Data", "width": 120},
+		{"label": _("SITE NAME"), "fieldname": "unit_name", "fieldtype": "Data", "width": 120},
+		{"label": _("UNIT NAME"), "fieldname": "unit_nam", "fieldtype": "Data", "width": 120},
+		{"label": _("AADHAAR NUMBER"), "fieldname": "aadhaar_number", "fieldtype": "Data", "width": 150},
+		{"label": _("ESIC NUMBER"), "fieldname": "esic_no", "fieldtype": "Data", "width": 120},
+		{"label": _("UAN"), "fieldname": "uan", "fieldtype": "Data", "width": 120},
 		{"label": _("STANDARD DAYS"), "fieldname": "standard_days", "fieldtype": "Float", "width": 100},
 		{"label": _("GROSS SALARY"), "fieldname": "gross_salary", "fieldtype": "Currency", "width": 120},
 		{"label": _("PRESENT DAYS"), "fieldname": "present_days", "fieldtype": "Float", "width": 100},
@@ -172,7 +178,7 @@ def get_data(filters):
 	)
 	
 	# Pre-fetch Employee Details
-	employee_map = {e.name: e for e in frappe.db.get_all("Employee", fields=["name", "holiday_list", "designation", "department", "all_1"])}
+	employee_map = {e.name: e for e in frappe.db.get_all("Employee", fields=["name", "holiday_list", "designation", "department", "gender", "all_1", "custom_aadhaar_number", "custom_esic_no", "custom_uan", "cat_no", "branch"])}
 	
 	# Fetch child table data
 	for i, ss in enumerate(ss_list):
@@ -182,9 +188,15 @@ def get_data(filters):
 			"idx": i + 1,
 			"employee": ss.employee,
 			"employee_name": ss.employee_name,
+			"gender": emp_info.get("gender"),
 			"designation": emp_info.get("designation"),
 			"department": emp_info.get("department"),
+			"cat_name": emp_info.get("cat_no"),
 			"unit_name": ss.branch or ss.department,
+			"unit_nam": emp_info.get("branch"),
+			"aadhaar_number": emp_info.get("custom_aadhaar_number"),
+			"esic_no": emp_info.get("custom_esic_no"),
+			"uan": emp_info.get("custom_uan"),
 			"standard_days": flt(ss.total_working_days),
 			"gross_salary": flt(ss.gross_pay),
 			"total_deduction": flt(ss.total_deduction),
