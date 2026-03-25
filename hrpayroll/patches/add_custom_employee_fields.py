@@ -81,6 +81,18 @@ def execute():
 				"label": "Cat Name",
 				"fieldtype": "Data",
 				"insert_after": "all_1"
+			},
+			{
+				"fieldname": "mfh_name",
+				"label": "MFH Name",
+				"fieldtype": "Data",
+				"insert_after": "cat_no"
+			},
+			{
+				"fieldname": "site_name",
+				"label": "Site Name",
+				"fieldtype": "Data",
+				"insert_after": "mfh_name"
 			}
 		]
 	}
